@@ -1,0 +1,16 @@
+How shall I relate the tables 'StreamingHistory' & 'Users' in SpotifyData.db?
+
+Streaming History has 7 columns per row. That means 7 different values in a record. In this case, we are keeping track of: id, user, fileID, endTime, artistName, trackName, msPLayed
+
+Check DataBase for the normalization
+	First Normal Form Rules:
+	- each table cell contains a single value
+	- each record needs to be unique
+
+	Second Normal Form Rules:
+	- follow 1NF
+	- Single column primsry key
+
+	Third Normal Form Rules:
+	- Be in 2NF
+	- Have no transitivefunctional dependencies

@@ -41,7 +41,7 @@ def createTables(DBName):
 	c = conn.cursor()
 	c.execute('CREATE TABLE IF NOT EXISTS StreamingHistory(id integer primary key AUTOINCREMENT , user integer, fileID integer, endTime varchar(100), artistName varchar(100), trackName varchar(100), msPLayed varchar(100))')
 
-	c.execute('CREATE TABLE IF NOT EXISTS Users(userid integer, tracks varchar(100), foreign key(userid) references StreamingHistory(user))')
+	c.execute('CREATE TABLE IF NOT EXISTS Users(userid integer, tracks varchar(100), artist varchar(100), foreign key(userid) references StreamingHistory(user))')
 
 	conn.commit()
 	conn.close()
@@ -92,8 +92,8 @@ def loadDB(DBName, filePath):
 		for obj in data:
 			c.execute('insert into StreamingHistory (user, fileID, endTime, artistName, trackName, msPlayed) values (?, ?, ?, ?, ?, ?)',
 				[userNum, count, obj['endTime'], obj['artistName'], obj['trackName'], obj['msPlayed']])
-			c.execute('insert into Users (userid, tracks) values(?, ?)',
-				[userNum, obj['trackName']])
+			c.execute('insert into Users (userid, tracks, artist) values(?, ?, ?)',
+				[userNum, obj['trackName'], obj['artistName']])
 			conn.commit()
 	conn.close()
 
